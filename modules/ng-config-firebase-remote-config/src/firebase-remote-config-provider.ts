@@ -3,26 +3,10 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { remoteConfig } from 'firebase/app';
 
-import { EMPTY, Observable, of, pipe } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, observeOn, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 
-import { ConfigProvider } from '@dagonmetric/ng-config';
-
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-function mapToObject() {
-    return pipe(
-        map((rcConfigObject) => {
-            const allkeys = Object.keys(rcConfigObject || {});
-            const obj: { [key: string]: string } = {};
-            for (const key of allkeys) {
-                obj[key] = rcConfigObject[key].asString();
-            }
-
-            return obj;
-        }),
-        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
-    );
-}
+import { ConfigProvider, ConfigSection } from '@dagonmetric/ng-config';
 
 import {
     FIREBASE_REMOTE_CONFIG_PROVIDER_OPTIONS,
@@ -31,11 +15,8 @@ import {
 import { firebaseAppFactory } from './firebase-app-factory';
 import { ZoneScheduler } from './zone-helpers';
 
-declare let Zone: any;
-
-export interface ConfigObjectTemplate {
-    [key: string]: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let Zone: { current: any };
 
 @Injectable({
     providedIn: 'any'
@@ -57,7 +38,7 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
     constructor(
         @Inject(FIREBASE_REMOTE_CONFIG_PROVIDER_OPTIONS)
         private readonly options: FirebaseRemoteConfigProviderOptions,
-        // tslint:disable-next-line: ban-types
+        // eslint-disable-next-line @typescript-eslint/ban-types
         @Inject(PLATFORM_ID) platformId: Object,
         private readonly ngZone: NgZone
     ) {
@@ -73,14 +54,14 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
                     rc.settings = this.options.remoteConfigSettings;
                 }
             }),
-            startWith(undefined as remoteConfig.RemoteConfig),
+            startWith((undefined as unknown) as remoteConfig.RemoteConfig),
             shareReplay({ bufferSize: 1, refCount: false })
         );
 
         this.rc = rc$.pipe(filter<remoteConfig.RemoteConfig>((rc) => !!rc));
     }
 
-    load(): Observable<{ [key: string]: string }> {
+    load(): Observable<ConfigSection> {
         const fresh$ = this.rc.pipe(
             switchMap((rc) =>
                 this.ngZone.runOutsideAngular(async () => {
@@ -104,7 +85,17 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
         );
 
         return fresh$.pipe(
-            mapToObject(),
+            // mapToObject(),
+            map((rcConfigObject) => {
+                const allkeys = Object.keys(rcConfigObject || {});
+                const obj: { [key: string]: string } = {};
+                for (const key of allkeys) {
+                    obj[key] = rcConfigObject[key].asString();
+                }
+
+                return obj;
+            }),
+            distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
             tap((configData) => {
                 this.cachedData = configData;
             }),
