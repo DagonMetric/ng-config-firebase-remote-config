@@ -1,2 +1,3 @@
-# ng-config-firebase-remote-config
-Firebase Remote Config implementation for ng-config.
+# Angular Firebase Remote Config Provider for NG-CONFIG
+
+Firebase Remote Config provider implementation for [DagonMetric/ng-config](https://github.com/DagonMetric/ng-config).
