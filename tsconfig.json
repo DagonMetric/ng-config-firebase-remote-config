@@ -24,6 +24,10 @@
 
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "./dist/out-tsc"
+    "outDir": "./dist/out-tsc",
+
+    "paths": {
+      "@dagonmetric/ng-config-firebase-remote-config": [ "./modules/ng-config-firebase-remote-config" ]
+    }
   }
 }
