@@ -7,11 +7,12 @@
  */
 
 export interface FirebaseConfig {
-    apiKey: string;
-    projectId: string;
-    appId: string;
+    apiKey?: string;
+    projectId?: string;
+    appId?: string;
     authDomain?: string;
     databaseURL?: string;
     storageBucket?: string;
     messagingSenderId?: string;
+    [key: string]: string | undefined;
 }
