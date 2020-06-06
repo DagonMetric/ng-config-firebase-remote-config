@@ -33,14 +33,8 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
         return 'FirebaseRemoteConfigProvider';
     }
 
-    get data(): { [key: string]: string } | null {
-        return this.cachedData || null;
-    }
-
     private readonly isBrowser: boolean;
     private readonly rc: Observable<remoteConfig.RemoteConfig>;
-
-    private cachedData?: { [key: string]: string } | null;
 
     constructor(
         @Inject(FIREBASE_REMOTE_CONFIG_PROVIDER_OPTIONS)
@@ -58,7 +52,7 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
             map((app) => app.remoteConfig()),
             tap((rc) => {
                 if (this.options.remoteConfigSettings) {
-                    rc.settings = this.options.remoteConfigSettings;
+                    rc.settings = this.options.remoteConfigSettings as remoteConfig.Settings;
                 }
             }),
             startWith((undefined as unknown) as remoteConfig.RemoteConfig),
@@ -69,43 +63,36 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
     }
 
     load(): Observable<ConfigSection> {
-        const load$ = this.rc.pipe(
+        return this.rc.pipe(
             switchMap((rc) =>
                 this.ngZone.runOutsideAngular(async () => {
-                    await rc.activate();
+                    if (!this.isBrowser) {
+                        return {};
+                    }
 
-                    if (this.isBrowser && (this.options.throwFetchError || (navigator && navigator.onLine))) {
-                        try {
-                            await rc.fetchAndActivate();
-                        } catch (fetchError) {
-                            if (this.options.throwFetchError) {
-                                throw fetchError;
-                            }
+                    try {
+                        await rc.fetch();
+                    } catch (fetchError) {
+                        if (this.options.throwIfLoadError) {
+                            throw fetchError;
                         }
                     }
 
+                    await rc.activate();
                     await rc.ensureInitialized();
 
                     return rc.getAll();
                 })
-            )
-        );
-
-        return load$.pipe(
-            map((rcConfigObject) => {
-                const allkeys = Object.keys(rcConfigObject || {});
-                const obj: { [key: string]: string } = {};
+            ),
+            map((config) => {
+                const allkeys = Object.keys(config);
+                const mappedConfig: ConfigSection = {};
                 for (const key of allkeys) {
-                    obj[key] = rcConfigObject[key].asString();
+                    mappedConfig[key] = config[key].asString();
                 }
 
-                return obj;
-            }),
-            // distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-            tap((configData) => {
-                this.cachedData = configData;
-            }),
-            shareReplay({ bufferSize: 1, refCount: true })
+                return mappedConfig;
+            })
         );
     }
 }
