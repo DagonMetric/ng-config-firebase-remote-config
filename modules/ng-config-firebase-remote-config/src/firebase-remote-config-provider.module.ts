@@ -28,14 +28,14 @@ import {
         }
     ]
 })
-export class HttpConfigProviderModule {
+export class FirebaseRemoteConfigProviderModule {
     /**
-     * Call this method to provide options for configuring the `FirebaseRemoteConfigProvider`.
+     * Call this method to initialize and provide options for `FirebaseRemoteConfigProvider`.
      * @param options An option object for `FirebaseRemoteConfigProvider`.
      */
-    static withOptions(options: FirebaseRemoteConfigProviderOptions): ModuleWithProviders {
+    static init(options: FirebaseRemoteConfigProviderOptions): ModuleWithProviders<FirebaseRemoteConfigProviderModule> {
         return {
-            ngModule: HttpConfigProviderModule,
+            ngModule: FirebaseRemoteConfigProviderModule,
             providers: [
                 {
                     provide: FIREBASE_REMOTE_CONFIG_PROVIDER_OPTIONS,
