@@ -4,7 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { remoteConfig } from 'firebase/app';
 
 import { EMPTY, Observable, of } from 'rxjs';
-import { distinctUntilChanged, filter, map, observeOn, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { filter, map, observeOn, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { ConfigProvider, ConfigSection } from '@dagonmetric/ng-config';
 
@@ -15,8 +15,7 @@ import {
 import { firebaseAppFactory } from './firebase-app-factory';
 import { ZoneScheduler } from './zone-helpers';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let Zone: { current: any };
+declare let Zone: { current: unknown };
 
 @Injectable({
     providedIn: 'any'
@@ -62,7 +61,7 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
     }
 
     load(): Observable<ConfigSection> {
-        const fresh$ = this.rc.pipe(
+        const load$ = this.rc.pipe(
             switchMap((rc) =>
                 this.ngZone.runOutsideAngular(async () => {
                     await rc.activate();
@@ -84,8 +83,7 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
             )
         );
 
-        return fresh$.pipe(
-            // mapToObject(),
+        return load$.pipe(
             map((rcConfigObject) => {
                 const allkeys = Object.keys(rcConfigObject || {});
                 const obj: { [key: string]: string } = {};
@@ -95,7 +93,7 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
 
                 return obj;
             }),
-            distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
+            // distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
             tap((configData) => {
                 this.cachedData = configData;
             }),
