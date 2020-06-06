@@ -10,7 +10,7 @@ import { NgZone } from '@angular/core';
 
 import * as firebase from 'firebase/app';
 
-import { FirebaseConfig } from './firebase-config';
+import { FirebaseConfig } from './firebase-remote-config-provider-options';
 
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function firebaseAppFactory(options: FirebaseConfig, zone: NgZone, appName?: string): firebase.app.App {
