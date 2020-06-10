@@ -38,7 +38,7 @@ describe('FirebaseRemoteConfigProvider', () => {
         it(`should return 'FirebaseRemoteConfigProvider'`, () => {
             TestBed.configureTestingModule({
                 imports: [
-                    FirebaseRemoteConfigProviderModule.init({
+                    FirebaseRemoteConfigProviderModule.configure({
                         firebaseConfig: firebaseTestConfig
                     })
                 ]
@@ -105,7 +105,7 @@ describe('FirebaseRemoteConfigProviderModule', () => {
     it(`should provide 'FirebaseRemoteConfigProvider'`, () => {
         TestBed.configureTestingModule({
             imports: [
-                FirebaseRemoteConfigProviderModule.init({
+                FirebaseRemoteConfigProviderModule.configure({
                     firebaseConfig: firebaseTestConfig
                 })
             ]
