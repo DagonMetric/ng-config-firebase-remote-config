@@ -33,7 +33,7 @@
     "tslib": "^1.10.0"
   },
   "peerDependencies": {
-    "@dagonmetric/ng-config": "^3.0.0",
+    "@dagonmetric/ng-config": "^4.0.0",
     "@angular/common": "^8.0.0-beta.0 || ^9.0.0-rc.0 || ^10.0.0-rc.0",
     "@angular/core": "^8.0.0-beta.0 || ^9.0.0-rc.0 || ^10.0.0-rc.0",
     "firebase": "^7.15.0",
