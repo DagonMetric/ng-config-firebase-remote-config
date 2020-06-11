@@ -5,7 +5,7 @@
       "name": "ng-config-firebase-remote-config",
       "root": "modules/ng-config-firebase-remote-config",
       "outputPath": "dist/packages/ng-config-firebase-remote-config",
-      "libraryName": "ngConfig",
+      "libraryName": "ngConfig.firebaseRemoteConfig",
       "envOverrides": {
         "prod": {
           "copy": [
