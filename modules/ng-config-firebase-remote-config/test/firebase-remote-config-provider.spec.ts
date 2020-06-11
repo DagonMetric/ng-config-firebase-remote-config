@@ -13,13 +13,9 @@ import {
 import { firebaseAppFactory } from '../src/firebase-app-factory';
 
 export const firebaseTestConfig = {
-    apiKey: 'AIzaSyA_6iPXq6Hnsz1B0OpCRr-RE_zXnsUXsP0',
-    authDomain: 'remoteconfigprovidertest.firebaseapp.com',
-    databaseURL: 'https://remoteconfigprovidertest.firebaseio.com',
-    projectId: 'remoteconfigprovidertest',
-    storageBucket: 'remoteconfigprovidertest.appspot.com',
-    messagingSenderId: '1024026888349',
-    appId: '1:1024026888349:web:90987460b5c0ab636b6c74'
+    apiKey: 'AIzaSyB69eGT5C4WTm-ugdTb2wA4dW_KCcR7sR4',
+    projectId: 'ng-config-demo',
+    appId: '1:1052789543009:web:af8c119286532364a4da20'
 };
 
 export class FirebaseApp implements Partial<app.App> {
@@ -39,7 +35,8 @@ describe('FirebaseRemoteConfigProvider', () => {
             TestBed.configureTestingModule({
                 imports: [
                     FirebaseRemoteConfigProviderModule.configure({
-                        firebaseConfig: firebaseTestConfig
+                        firebaseConfig: firebaseTestConfig,
+                        prefix: 'myAppPrefix_'
                     })
                 ]
             });
@@ -106,7 +103,8 @@ describe('FirebaseRemoteConfigProviderModule', () => {
         TestBed.configureTestingModule({
             imports: [
                 FirebaseRemoteConfigProviderModule.configure({
-                    firebaseConfig: firebaseTestConfig
+                    firebaseConfig: firebaseTestConfig,
+                    prefix: 'myAppPrefix_'
                 })
             ]
         });
