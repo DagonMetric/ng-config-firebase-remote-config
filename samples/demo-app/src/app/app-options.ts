@@ -3,7 +3,6 @@ export class AppOptions {
     lang = '';
     logEnabled = false;
     logLevel = 0;
-    num = 0;
     arr = [];
     child = {
         key1: '',

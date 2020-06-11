@@ -1,14 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 // ng-config
-import { ConfigModule, NG_CONFIG_LOGGER } from '@dagonmetric/ng-config';
-import { HttpConfigProviderModule } from '@dagonmetric/ng-config/http-config-provider';
-
-// Custom logger for ng-config
-import { CustomConfigLogger } from './custom-config-logger';
+import { ConfigModule } from '@dagonmetric/ng-config';
+import { FirebaseRemoteConfigProviderModule } from '@dagonmetric/ng-config-firebase-remote-config';
 
 import { AppComponent } from './app.component';
 
@@ -17,24 +13,26 @@ import { AppComponent } from './app.component';
     imports: [
         CommonModule,
         BrowserModule,
-        HttpClientModule,
 
-        // ng-config imports
+        // ng-config modules
         //
         ConfigModule.configure(true, {
             debug: true,
             optionsSuffix: 'Options'
         }),
-        HttpConfigProviderModule.configure({
-            endpoint: 'https://us-central1-ng-config-demo.cloudfunctions.net/configuration'
+        FirebaseRemoteConfigProviderModule.configure({
+            firebaseConfig: {
+                apiKey: 'AIzaSyB69eGT5C4WTm-ugdTb2wA4dW_KCcR7sR4',
+                projectId: 'ng-config-demo',
+                appId: '1:1052789543009:web:af8c119286532364a4da20',
+                measurementId: 'G-EKQC89VKHX'
+            },
+            remoteConfigSettings: {
+                minimumFetchIntervalMillis: 30000
+            },
+            prefix: 'myAppPrefix_',
+            throwIfLoadError: true
         })
-    ],
-    providers: [
-        // (Optional) Providing custom logger for ng-config's debug information.
-        {
-            provide: NG_CONFIG_LOGGER,
-            useExisting: CustomConfigLogger
-        }
     ],
     bootstrap: [AppComponent]
 })
