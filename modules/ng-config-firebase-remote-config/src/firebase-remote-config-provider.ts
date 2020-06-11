@@ -110,11 +110,11 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
                     const valueStr = config[key].asString();
                     let normalizedKey = key;
 
-                    if (this.options.keyPrefix) {
-                        if (!key.toLowerCase().startsWith(this.options.keyPrefix.toLowerCase())) {
+                    if (this.options.prefix) {
+                        if (!key.toLowerCase().startsWith(this.options.prefix.toLowerCase())) {
                             continue;
                         } else {
-                            normalizedKey = key.substr(this.options.keyPrefix.length);
+                            normalizedKey = key.substr(this.options.prefix.length);
                         }
                     }
 
