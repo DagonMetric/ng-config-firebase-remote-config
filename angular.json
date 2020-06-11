@@ -3,73 +3,6 @@
   "version": 1,
   "newProjectRoot": "modules",
   "projects": {
-    "example-app": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "example-app",
-      "sourceRoot": "example-app/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/example-app",
-            "index": "example-app/src/index.html",
-            "main": "example-app/src/main.ts",
-            "polyfills": "example-app/src/polyfills.ts",
-            "tsConfig": "example-app/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "example-app/src/favicon.ico",
-              "example-app/src/assets"
-            ],
-            "styles": [],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "example-app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "example-app:build:production"
-            }
-          }
-        }
-      }
-    },
     "ng-config-firebase-remote-config": {
       "root": "modules/ng-config-firebase-remote-config",
       "sourceRoot": "modules/ng-config-firebase-remote-config",
@@ -113,7 +46,38 @@
           }
         }
       }
+    },
+    "demo-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "samples/demo-app",
+      "sourceRoot": "samples/demo-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/demo-app",
+            "index": "samples/demo-app/src/index`.html",
+            "main": "samples/demo-app/src/main.ts",
+            "polyfills": "samples/demo-app/src/polyfills.ts",
+            "tsConfig": "tsconfig.demo-app.json",
+            "aot": true,
+            "assets": [
+              "samples/demo-app/src/favicon.ico"
+            ],
+            "styles": [],
+            "scripts": []
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demo-app:build"
+          }
+        }
+      }
     }
   },
-  "defaultProject": "example-app"
+  "defaultProject": "demo-app"
 }
