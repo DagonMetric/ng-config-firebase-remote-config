@@ -25,6 +25,23 @@ import { ZoneScheduler } from './zone-helpers';
 
 declare let Zone: { current: unknown };
 
+interface NestedConfigSection {
+    [key: string]: string | NestedConfigSection;
+}
+
+const doubleUnderscoreRegExp = /__/g;
+const validKeyRegExp = /^[_]?[a-zA-Z]/;
+
+const isValidKeys = (keys: string[]): boolean => {
+    for (const key of keys) {
+        if (!validKeyRegExp.test(key)) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
 @Injectable({
     providedIn: 'any'
 })
@@ -70,15 +87,17 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
                         return {};
                     }
 
+                    await rc.activate();
+
                     try {
                         await rc.fetch();
+                        await rc.activate();
                     } catch (fetchError) {
                         if (this.options.throwIfLoadError) {
                             throw fetchError;
                         }
                     }
 
-                    await rc.activate();
                     await rc.ensureInitialized();
 
                     return rc.getAll();
@@ -88,7 +107,42 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
                 const allkeys = Object.keys(config);
                 const mappedConfig: ConfigSection = {};
                 for (const key of allkeys) {
-                    mappedConfig[key] = config[key].asString();
+                    const valueStr = config[key].asString();
+                    let normalizedKey = key;
+
+                    if (this.options.keyPrefix) {
+                        if (!key.toLowerCase().startsWith(this.options.keyPrefix.toLowerCase())) {
+                            continue;
+                        } else {
+                            normalizedKey = key.substr(this.options.keyPrefix.length);
+                        }
+                    }
+
+                    const nestedKeys = normalizedKey.split(doubleUnderscoreRegExp);
+                    if (nestedKeys.length > 1 && isValidKeys(nestedKeys)) {
+                        const firstKey = nestedKeys[0];
+                        if (!mappedConfig[firstKey] || typeof mappedConfig[firstKey] !== 'object') {
+                            mappedConfig[firstKey] = {};
+                        }
+
+                        let accObj = mappedConfig[firstKey] as NestedConfigSection;
+
+                        for (let i = 1; i < nestedKeys.length; i++) {
+                            const currentKey = nestedKeys[i];
+                            if (i === nestedKeys.length - 1) {
+                                accObj[currentKey] = valueStr;
+                                break;
+                            }
+
+                            if (!accObj[currentKey] || typeof accObj[currentKey] !== 'object') {
+                                accObj[currentKey] = {};
+                            }
+
+                            accObj = accObj[currentKey] as NestedConfigSection;
+                        }
+                    } else {
+                        mappedConfig[normalizedKey] = valueStr;
+                    }
                 }
 
                 return mappedConfig;
