@@ -38,6 +38,7 @@ export interface FirebaseRemoteConfigProviderOptions {
     appName?: string;
     remoteConfigSettings?: FirebaseRemoteConfigSettings;
     throwIfLoadError?: boolean;
+    keyPrefix?: string;
 }
 
 export const FIREBASE_REMOTE_CONFIG_PROVIDER_OPTIONS = new InjectionToken<FirebaseRemoteConfigProviderOptions>(
