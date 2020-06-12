@@ -6,6 +6,12 @@
       "root": "modules/ng-config-firebase-remote-config",
       "outputPath": "dist/packages/ng-config-firebase-remote-config",
       "libraryName": "ngConfig.firebaseRemoteConfig",
+      "externals": {
+        "@dagonmetric/ng-config": "ngConfig",
+        "firebase": "firebase",
+        "firebase/app": "firebase.app",
+        "firebase/remote-config": "firebase.remoteConfig"
+      },
       "envOverrides": {
         "prod": {
           "copy": [
@@ -18,6 +24,5 @@
         }
       }
     }
-  ],
-  "apps": []
+  ]
 }
