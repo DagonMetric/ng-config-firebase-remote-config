@@ -28,10 +28,11 @@ import { AppComponent } from './app.component';
                 measurementId: 'G-EKQC89VKHX'
             },
             remoteConfigSettings: {
-                minimumFetchIntervalMillis: 30000
+                minimumFetchIntervalMillis: 30000,
+                fetchTimeoutMillis: 12000
             },
             prefix: 'myAppPrefix_',
-            throwIfLoadError: true
+            throwIfLoadError: false
         })
     ],
     bootstrap: [AppComponent]
