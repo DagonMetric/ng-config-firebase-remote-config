@@ -1,5 +1,8 @@
 # Angular Firebase Remote Config Provider for NG-CONFIG
 
+[![GitHub Actions Status](https://github.com/DagonMetric/ng-config-firebase-remote-config/workflows/Main%20Workflow/badge.svg)](https://github.com/DagonMetric/ng-config-firebase-remote-config/actions)
+[![Gitter](https://badges.gitter.im/DagonMetric/general.svg)](https://gitter.im/DagonMetric/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Firebase Remote Config integration for [DagonMetric/ng-config](https://github.com/DagonMetric/ng-config).
 
 ## Get Started
