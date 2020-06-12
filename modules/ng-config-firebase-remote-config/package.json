@@ -1,7 +1,7 @@
 {
   "name": "@dagonmetric/ng-config-firebase-remote-config",
   "version": "0.0.0-PLACEHOLDER",
-  "description": "Angular Firebase Remote Config provider implementation for @dagonMetric/ng-config.",
+  "description": "Angular Firebase Remote Config integration for @dagonMetric/ng-config.",
   "author": "DagonMetric",
   "license": "MIT",
   "repository": {
