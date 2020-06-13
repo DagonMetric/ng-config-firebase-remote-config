@@ -100,6 +100,10 @@ export class AppComponent {
 
 Edit [app.component.ts in stackblitz](https://stackblitz.com/github/dagonmetric/ng-config-firebase-remote-config/tree/master/samples/demo-app?file=src%2Fapp%2Fapp.component.ts)
 
+## Related Projects
+
+* [ng-config](https://github.com/DagonMetric/ng-config) - The core configuration & options service for Angular
+
 ## Feedback and Contributing
 
 Check out the [Contributing](https://github.com/DagonMetric/ng-config-firebase-remote-config/blob/master/CONTRIBUTING.md) page.
