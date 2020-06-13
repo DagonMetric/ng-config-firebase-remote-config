@@ -23,7 +23,7 @@
   "dependencies": {
     "@angular/common": "^9.1.11",
     "@angular/core": "^9.1.11",
-    "@dagonmetric/ng-config": "^4.0.1",
+    "@dagonmetric/ng-config": "^4.0.2",
     "firebase": "^7.15.1",
     "rxjs": "^6.5.5",
     "tslib": "^2.0.0"
