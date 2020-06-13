@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ConfigModule } from '@dagonmetric/ng-config';
 import { FirebaseRemoteConfigProviderModule } from '@dagonmetric/ng-config-firebase-remote-config';
 
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -21,18 +23,13 @@ import { AppComponent } from './app.component';
             optionsSuffix: 'Options'
         }),
         FirebaseRemoteConfigProviderModule.configure({
-            firebaseConfig: {
-                apiKey: 'AIzaSyB69eGT5C4WTm-ugdTb2wA4dW_KCcR7sR4',
-                projectId: 'ng-config-demo',
-                appId: '1:1052789543009:web:af8c119286532364a4da20',
-                measurementId: 'G-EKQC89VKHX'
-            },
+            firebaseConfig: environment.firebaseConfig,
             remoteConfigSettings: {
-                minimumFetchIntervalMillis: 30000,
-                fetchTimeoutMillis: 12000
+                minimumFetchIntervalMillis: environment.production ? 43200000 : 30000,
+                fetchTimeoutMillis: environment.production ? 30000 : 60000
             },
             prefix: 'myAppPrefix_',
-            throwIfLoadError: false
+            throwIfLoadError: environment.production ? false : true
         })
     ],
     bootstrap: [AppComponent]
