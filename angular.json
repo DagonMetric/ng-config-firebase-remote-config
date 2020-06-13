@@ -113,6 +113,9 @@
             "devServerTarget": "demo-app:serve"
           },
           "configurations": {
+            "ci": {
+              "protractorConfig": "samples/demo-app-e2e/protractor-ci.conf.js"
+            },
             "production": {
               "devServerTarget": "demo-app:serve:production"
             }
