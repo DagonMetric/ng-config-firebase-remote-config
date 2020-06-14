@@ -23,7 +23,7 @@ module.exports = (config) => {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
         coverageIstanbulReporter: {
-            dir: require('path').join(__dirname, '../../dist/coverage/ng-config-firebase-remote-config'),
+            dir: require('path').join(__dirname, '../../coverage/ng-config-firebase-remote-config'),
             reports: ['html', 'lcovonly', 'text-summary', 'cobertura'],
             fixWebpackSourcePaths: true,
             thresholds: {
@@ -35,7 +35,7 @@ module.exports = (config) => {
         },
         reporters: ['progress', 'kjhtml'],
         junitReporter: {
-            outputDir: '../../dist/junit/ng-config-firebase-remote-config'
+            outputDir: '../../junit/ng-config-firebase-remote-config'
         },
         port: 9876,
         colors: true,
