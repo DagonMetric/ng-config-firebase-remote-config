@@ -84,9 +84,16 @@ export class AppComponent {
 
     // Get with options class
     const appOptions = this.configService.mapType(AppOptions));
+
     console.log('appOptions: ', JSON.stringify(appOptions));
+    // Call reload to get the fresh config values from providers
+    // this.configService.reload().subscribe(() => {
+    //   console.log('Reloaded');
+    // });
 
     // Configuration value change detection
+    // This will only trigger when reload() is called and
+    // any value changes
     this.configService.valueChanges.subscribe(() => {
       const latestValue = this.configService.getValue('key1'));
       console.log('latest value: ', latestValue);
