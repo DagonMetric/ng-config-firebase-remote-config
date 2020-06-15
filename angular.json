@@ -49,7 +49,11 @@
     },
     "demo-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "samples/demo-app",
       "sourceRoot": "samples/demo-app/src",
       "prefix": "app",
@@ -58,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/demo-app",
-            "index": "samples/demo-app/src/index`.html",
+            "index": "samples/demo-app/src/index.html",
             "main": "samples/demo-app/src/main.ts",
             "polyfills": "samples/demo-app/src/polyfills.ts",
-            "tsConfig": "tsconfig.demo-app.json",
+            "tsConfig": "samples/demo-app/tsconfig.app.json",
             "aot": true,
             "assets": [
               "samples/demo-app/src/favicon.ico"
