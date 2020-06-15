@@ -19,8 +19,7 @@ import { AppComponent } from './app.component';
         // ng-config modules
         //
         ConfigModule.configure(true, {
-            debug: true,
-            optionsSuffix: 'Options'
+            debug: true
         }),
         FirebaseRemoteConfigProviderModule.configure({
             firebaseConfig: environment.firebaseConfig,
