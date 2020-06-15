@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "site": "ng-config-remote-config-demo",
+    "public": "demo-app",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
