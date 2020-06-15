@@ -17,13 +17,13 @@ describe('workspace-project App', () => {
     it(`should display 'appOptions.name' text`, () => {
         void page.navigateTo();
 
-        void expect(page.getMapTypeSectionText()).toEqual('ng-config-demo');
+        void expect(page.getMapTypeSectionText()).toEqual('Firebase Remote Config-Demo');
     });
 
     it(`should display 'childOptions.key1' text`, () => {
         void page.navigateTo();
 
-        void expect(page.getMapObjectSectionText()).toEqual('a');
+        void expect(page.getMapObjectSectionText()).toEqual('value1');
     });
 
     it(`should display 'configValue' text`, () => {
