@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@dagonmetric/angular-build/src/schemas/schema.json#",
-  "libs": [{
-    "extends": "ngb:lib-default",
+  "libs": [
+    {
+      "extends": "ngb:lib-default",
       "name": "ng-config-firebase-remote-config",
       "root": "modules/ng-config-firebase-remote-config",
       "outputPath": "dist/packages/ng-config-firebase-remote-config",
@@ -21,6 +22,27 @@
           "bundles": true,
           "packageJsonCopy": true,
           "banner": "../banner.txt"
+        }
+      }
+    },
+    {
+      "name": "copy-firebase-config",
+      "root": ".",
+      "outputPath": "dist",
+      "clean": false,
+      "tsTranspilations": false,
+      "bundles": false,
+      "skip": true,
+      "envOverrides": {
+        "prod": {
+          "skip": false,
+          "copy": [
+            {
+              "from": "firebase.json",
+              "to": "firebase.json"
+
+            }
+          ]
         }
       }
     }
