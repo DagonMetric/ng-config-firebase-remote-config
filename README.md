@@ -36,8 +36,7 @@ import { FirebaseRemoteConfigProviderModule } from '@dagonmetric/ng-config-fireb
 
     // ng-config modules
     ConfigModule.configure(true, {
-      debug: true,
-      optionsSuffix: 'Options'
+      debug: true
     }),
     FirebaseRemoteConfigProviderModule.configure({
         firebaseConfig: {
@@ -83,9 +82,9 @@ export class AppComponent {
     console.log('value: ', configValue);
 
     // Get with options class
-    const appOptions = this.configService.mapType(AppOptions));
-
+    const appOptions = this.configService.mapType('app', AppOptions));
     console.log('appOptions: ', JSON.stringify(appOptions));
+
     // Call reload to get the fresh config values from providers
     // this.configService.reload().subscribe(() => {
     //   console.log('Reloaded');
@@ -98,7 +97,7 @@ export class AppComponent {
       const latestValue = this.configService.getValue('key1'));
       console.log('latest value: ', latestValue);
 
-      const lastestOptions = this.configService.mapType(AppOptions));
+      const lastestOptions = this.configService.mapType('app', AppOptions));
       console.log('lastest appOptions: ', lastestOptions);
     });
   }
@@ -107,9 +106,15 @@ export class AppComponent {
 
 Edit [app.component.ts in stackblitz](https://stackblitz.com/github/dagonmetric/ng-config-firebase-remote-config/tree/master/samples/demo-app?file=src%2Fapp%2Fapp.component.ts)
 
+## Samples
+
+* Demo app [view source](https://github.com/DagonMetric/ng-config-firebase-remote-config/tree/master/samples/demo-app) / [live edit in stackblitz](https://stackblitz.com/github/dagonmetric/ng-config-firebase-remote-config/tree/master/samples/demo-app)
+
 ## Related Projects
 
-* [ng-config](https://github.com/DagonMetric/ng-config) - The core configuration & options service for Angular
+* [ng-config](https://github.com/DagonMetric/ng-config) - The core configuration & options service for Angular applications
+* [ng-log](https://github.com/DagonMetric/ng-log) - Vendor-agnostic logging, analytics and telemetry service abstractions and some implementations for Angular applications
+* [ng-cache](https://github.com/DagonMetric/ng-cache) - Caching service for Angular applications
 
 ## Feedback and Contributing
 
