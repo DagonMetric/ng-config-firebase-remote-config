@@ -22,7 +22,7 @@ or yarn
 yarn add @dagonmetric/ng-config @dagonmetric/ng-config-firebase-remote-config
 ```
 
-Latest npm package is [![npm version](https://img.shields.io/npm/v/@dagonmetric/ng-config-firebase-remote-config.svg)](https://www.npmjs.com/package/@dagonmetric/ng-config-firebase-remote-config)
+Latest npm package is [![npm version](https://badge.fury.io/js/%40dagonmetric%2Fng-config-firebase-remote-config.svg)](https://www.npmjs.com/package/@dagonmetric/ng-config-firebase-remote-config)
 
 ### Module Setup (app.module.ts)
 
