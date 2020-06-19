@@ -4,7 +4,7 @@
 [![Azure Pipelines Status](https://dev.azure.com/DagonMetric/ng-config/_apis/build/status/DagonMetric.ng-config-firebase-remote-config?branchName=master)](https://dev.azure.com/DagonMetric/ng-config/_build?definitionId=18)
 [![Gitter](https://badges.gitter.im/DagonMetric/general.svg)](https://gitter.im/DagonMetric/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Angular Firebase Remote Config integration for [DagonMetric/ng-config](https://github.com/DagonMetric/ng-config).
+Google Firebase Remote Config integration of [DagonMetric/ng-config](https://github.com/DagonMetric/ng-config) for Angular applications.
 
 ## Get Started
 
