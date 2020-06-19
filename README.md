@@ -114,6 +114,7 @@ Edit [app.component.ts in stackblitz](https://stackblitz.com/github/dagonmetric/
 
 * [ng-config](https://github.com/DagonMetric/ng-config) - The core configuration & options service for Angular applications
 * [ng-log](https://github.com/DagonMetric/ng-log) - Vendor-agnostic logging, analytics and telemetry service abstractions and some implementations for Angular applications
+* [ng-log-firebase-analytics](https://github.com/DagonMetric/ng-log-firebase-analytics) - Firebase Analytics implementation for `ng-log`
 * [ng-cache](https://github.com/DagonMetric/ng-cache) - Caching service for Angular applications
 
 ## Feedback and Contributing
