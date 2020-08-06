@@ -18,7 +18,7 @@
     "@angular/router": "^10.0.8",
     "@dagonmetric/ng-config": "^4.2.2",
     "@dagonmetric/ng-config-firebase-remote-config": "^4.2.3",
-    "firebase": "^7.17.1",
+    "firebase": "^7.17.2",
     "rxjs": "^6.6.2",
     "tslib": "~2.0.0",
     "zone.js": "^0.10.3"
