@@ -1,0 +1,61 @@
+{
+  "$schema": "./node_modules/lib-tools/schemas/schema.json",
+  "projects": {
+    "ng-config-firebase-remote-config": {
+      "root": "modules/ng-config-firebase-remote-config",
+      "tasks": {
+        "build": {
+          "outputPath": "../../dist/packages/ng-config-firebase-remote-config",
+          "script": {
+            "compilations": "auto",
+            "umdId": "ngConfig.firebaseRemoteConfig",
+            "externals": {
+              "@dagonmetric/ng-config": "ngConfig",
+              "firebase": "firebase",
+              "firebase/app": "firebase.app",
+              "firebase/remote-config": "firebase.remoteConfig"
+            }
+          }
+        },
+        "test": {
+          "testIndexFile": "test.ts",
+          "tsConfig": "tsconfig.test.json",
+          "envOverrides": {
+            "ci": {
+              "codeCoverageExclude": [
+                "**/test.ts",
+                "**/index.ts",
+                "**/public_api.ts"
+              ],
+              "reporters": [
+                "junit",
+                "coverage-istanbul"
+              ],
+              "browsers": [
+                "ChromeHeadlessCI"
+              ],
+              "singleRun": true
+            }
+          }
+        }
+      }
+    },   
+    "copy-firebase-config": {
+      "root": ".",
+      "tasks": {
+        "build": {
+          "outputPath": "dist",
+          "clean": false,
+          "copy": [
+            {
+              "from": "firebase.json",
+              "to": "firebase.json"
+            },
+            "package.json"
+          ],
+          "packageJson": false
+        }
+      }
+    }
+  }
+}
