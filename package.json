@@ -13,11 +13,12 @@
   "homepage": "https://github.com/Dagonmetric/ng-config-firebase-remote-config",
   "scripts": {
     "ng": "ng",
-    "ngb": "ngb",
+    "lib": "lib",
     "lint": "eslint -c .eslintrc.json --ext .js,.ts .",
-    "build": "ngb build --env.prod && ng build --prod",
-    "test": "ng test",
-    "e2e": "ng e2e",
+    "build": "lib build --env.prod && npm run build:samples",
+    "build:samples": "ng build --prod",
+    "test": "lib test --env.ci=true",
+    "e2e": "ng e2e -c=ci",
     "serve": "ng serve"
   },
   "dependencies": {
