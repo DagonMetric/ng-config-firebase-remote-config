@@ -9,6 +9,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface FirebaseConfig {
+    [key: string]: string | undefined;
     apiKey?: string;
     projectId?: string;
     appId?: string;
@@ -16,7 +17,6 @@ export interface FirebaseConfig {
     databaseURL?: string;
     storageBucket?: string;
     messagingSenderId?: string;
-    [key: string]: string | undefined;
 }
 
 export interface FirebaseRemoteConfigSettings {
