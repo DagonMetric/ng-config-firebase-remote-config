@@ -16,7 +16,7 @@
     "@angular/platform-browser": "^10.1.4",
     "@angular/platform-browser-dynamic": "^10.1.4",
     "@angular/router": "^10.1.4",
-    "@dagonmetric/ng-config": "^4.3.0",
+    "@dagonmetric/ng-config": "^4.3.1",
     "@dagonmetric/ng-config-firebase-remote-config": "^4.3.0",
     "firebase": "^7.21.1",
     "rxjs": "^6.6.3",
