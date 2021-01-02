@@ -9,7 +9,7 @@
 import { Inject, Injectable, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-import { remoteConfig } from 'firebase/app';
+import firebase from 'firebase/app';
 
 import { EMPTY, Observable, of } from 'rxjs';
 import { filter, map, observeOn, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
@@ -51,7 +51,7 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
     }
 
     private readonly isBrowser: boolean;
-    private readonly rc: Observable<remoteConfig.RemoteConfig>;
+    private readonly rc: Observable<firebase.remoteConfig.RemoteConfig>;
 
     constructor(
         @Inject(FIREBASE_REMOTE_CONFIG_PROVIDER_OPTIONS)
@@ -69,14 +69,14 @@ export class FirebaseRemoteConfigProvider implements ConfigProvider {
             map((app) => app.remoteConfig()),
             tap((rc) => {
                 if (this.options.remoteConfigSettings) {
-                    rc.settings = this.options.remoteConfigSettings as remoteConfig.Settings;
+                    rc.settings = this.options.remoteConfigSettings as firebase.remoteConfig.Settings;
                 }
             }),
-            startWith((undefined as unknown) as remoteConfig.RemoteConfig),
+            startWith((undefined as unknown) as firebase.remoteConfig.RemoteConfig),
             shareReplay({ bufferSize: 1, refCount: false })
         );
 
-        this.rc = rc$.pipe(filter<remoteConfig.RemoteConfig>((rc) => !!rc));
+        this.rc = rc$.pipe(filter<firebase.remoteConfig.RemoteConfig>((rc) => !!rc));
     }
 
     load(): Observable<ConfigSection> {
