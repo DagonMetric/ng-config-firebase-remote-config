@@ -1,7 +1,7 @@
 import { InjectionToken, NgZone, Optional } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { app, remoteConfig } from 'firebase/app';
+import firebase from 'firebase/app';
 
 import { CONFIG_PROVIDER } from '@dagonmetric/ng-config';
 
@@ -18,11 +18,11 @@ export const firebaseTestConfig = {
     appId: '1:610492922716:web:e2c04dbbb1795258b21f99'
 };
 
-export class FirebaseApp implements Partial<app.App> {
+export class FirebaseApp implements Partial<firebase.app.App> {
     name?: string;
     options?: { [key: string]: unknown };
     delete?: () => Promise<void>;
-    remoteConfig?: () => remoteConfig.RemoteConfig;
+    remoteConfig?: () => firebase.remoteConfig.RemoteConfig;
 }
 
 export const FIREBASE_APP_NAME = new InjectionToken<string | undefined>('FirebaseAppName');
