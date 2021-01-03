@@ -24,7 +24,10 @@ jobs:
         displayName: 'Run linting'
       - script: |
           npm run build
-        displayName: "Run build"      
+        displayName: "Run build"
+      - script: |
+          npm run test
+        displayName: "Run test"
       - bash: |
           packageName=`node -p "require('./package.json').name.replace(/^@.+\//,'');"`
           echo "##vso[task.setvariable variable=packageName]$packageName"
@@ -52,7 +55,6 @@ jobs:
           failIfCoverageEmpty: true
         condition: succeededOrFailed()
         displayName: Publish code coverage results
-
       - task: PublishPipelineArtifact@1
         inputs:
           artifactName: 'release-notes'
